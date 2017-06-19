@@ -14,10 +14,12 @@ class BookingsController < ApplicationController
   end
 
   def create
+
+    # redirect to confirmation
     @booking = @space.bookings.build(booking_params)
 
     if @booking.save
-      redirect_to space_path(@space)
+      redirect_to space_booking_path(@space)
     else
       render :new
     end
@@ -27,8 +29,10 @@ class BookingsController < ApplicationController
   end
 
   def update
+
+    # redirect to confirmation
     if @booking.update(booking_params)
-      redirect_to booking_path(@booking)
+      redirect_to space_booking_path(@booking)
     else
       render :new
     end
@@ -36,7 +40,7 @@ class BookingsController < ApplicationController
 
   def destroy
     @booking.destroy
-    redirect_to bookings_path
+    redirect_to space_bookings_path
   end
 
   private
