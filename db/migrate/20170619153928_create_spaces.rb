@@ -3,7 +3,7 @@ class CreateSpaces < ActiveRecord::Migration[5.0]
     create_table :spaces do |t|
       t.string :name
       t.string :location
-      t.integer :owner_id
+      t.references :user, foreign_key: true
       t.boolean :covered
       t.boolean :staff
       t.boolean :charging
