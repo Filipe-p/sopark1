@@ -1,6 +1,6 @@
 class BookingsController < ApplicationController
   before_action :set_booking, only: [:show, :edit, :update, :destroy]
-  before_action :set_space, only: [:show, :edit, :update, :destroy]
+  before_action :set_space, only: [:new, :show, :create, :edit, :update, :destroy]
 
   def index
     @bookings = Booking.all
@@ -14,14 +14,17 @@ class BookingsController < ApplicationController
   end
 
   def create
-
     # redirect to confirmation
-    @booking = @space.bookings.build(booking_params)
+    @booking = Booking.new(booking_params)
+    @booking.space = @space
+
+    # @booking = @space.bookings.build(booking_params)
 
     if @booking.save
       redirect_to space_booking_path(@space)
     else
-      render :new
+      # render :new
+      redirect_to root_path
     end
   end
 
@@ -54,10 +57,10 @@ class BookingsController < ApplicationController
   end
 
   def booking_params
-    booking_params = params.require(:booking).permit(:start_date, :end_date, :cost, :status)
+    booking_params = params.require(:booking).permit(:start_datetime, :end_datetime, :cost, :status)
 
-    booking_params[:start_date] = Date.parse(booking_params[:start_date])
-    booking_params[:end_date] = Date.parse(booking_params[:end_date])
+    booking_params[:start_datetime] = Date.parse(booking_params[:start_datetime])
+    booking_params[:end_datetime] = Date.parse(booking_params[:end_datetime])
 
     booking_params
   end
