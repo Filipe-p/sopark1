@@ -63,6 +63,15 @@ class BookingsController < ApplicationController
     booking_params[:start_datetime] = Date.parse(booking_params[:start_datetime])
     booking_params[:end_datetime] = Date.parse(booking_params[:end_datetime])
 
+    booking_params[:cost] = Date.parse(booking_params[start_datetime]) - Date.parse(booking_params[:end_datetime])
+
+
     booking_params
+  end
+
+  def calculate_cost
+    space_price = @space.price
+    booking_n_days =
+
   end
 end
