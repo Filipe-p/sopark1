@@ -60,18 +60,13 @@ class BookingsController < ApplicationController
   def booking_params
     booking_params = params.require(:booking).permit(:start_datetime, :end_datetime, :cost, :status)
 
+    byebug
+
     booking_params[:start_datetime] = Date.parse(booking_params[:start_datetime])
     booking_params[:end_datetime] = Date.parse(booking_params[:end_datetime])
 
-    booking_params[:cost] = Date.parse(booking_params[start_datetime]) - Date.parse(booking_params[:end_datetime])
-
+    booking_params[:cost] = (booking_params[:start_datetime] - booking_params[:end_datetime]).to_i * @space.price
 
     booking_params
-  end
-
-  def calculate_cost
-    space_price = @space.price
-    booking_n_days =
-
   end
 end
