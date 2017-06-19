@@ -17,6 +17,7 @@ class BookingsController < ApplicationController
     # redirect to confirmation
     @booking = Booking.new(booking_params)
     @booking.space = @space
+    @booking.user_id = current_user
 
     # @booking = @space.bookings.build(booking_params)
 
