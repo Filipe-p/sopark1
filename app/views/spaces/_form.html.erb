@@ -1,0 +1,15 @@
+<div class="form">
+  <%= simple_form_for @space do |f| %>
+  <%= f.input :name, input_html: { placeholder: "Name your space" } %>
+  <%= f.input :location, input_html: { placeholder: "Where is it?" } %>
+  <%= f.input :covered, as: :boolean, checked_value: true, unchecked_value: false %>
+  <%= f.input :staff, as: :boolean, checked_value: true, unchecked_value: false %>
+  <%= f.input :valet, as: :boolean, checked_value: true, unchecked_value: false %>
+  <%= f.input :gate, as: :boolean, checked_value: true, unchecked_value: false %>
+  <%= f.input :cctv, as: :boolean, checked_value: true, unchecked_value: false %>
+  <%= f.input :charging, as: :boolean, checked_value: true, unchecked_value: false %>
+  <%= f.input :water, as: :boolean, checked_value: true, unchecked_value: false %>
+
+  <%= f.submit class: "btn btn-primary" %>
+  <% end %>
+</div>
