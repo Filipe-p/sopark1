@@ -1,26 +1,26 @@
 
-.header-course {
+.header-spaces {
   border: 1px solid #dce0e0;
 }
-.header-course-details {
+.header-spaces-details {
   display: flex;
   align-items: center;
   padding: 30px;
   padding-left: 0;
 }
-.header-course p {
+.header-spaces p {
   font-weight: normal;
   font-size: 14px;
   color: $gray-light;
 }
-.header-course h1 {
+.header-spaces h1 {
   font-size: 18px;
   margin-top: 0;
 }
-.header-course-lecturer {
+.header-spaces-user {
   padding: 20px;
 }
-.header-course form {
+.header-spaces form {
   margin: 20px 0;
   margin-right: 0;
   background: #F4F4F4;

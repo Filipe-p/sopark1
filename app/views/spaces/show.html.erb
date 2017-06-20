@@ -1,45 +1,127 @@
-<div class="container">
-        <div class="row">
-          <h2 class="text-center"><%= @space.name %></h2>
+
+
+      <% content_for(:after_js) do %>
+      <%= javascript_tag do %>
+      $(document).ready(function() {
+      var handler = Gmaps.build('Google');
+      handler.buildMap({ internal: { id: 'map' } }, function() {
+      markers = handler.addMarkers(<%= raw @hash.to_json %>);
+      handler.bounds.extendWith(markers);
+      handler.fitMapToBounds();
+      if (markers.length == 0) {
+      handler.getMap().setZoom(2);
+    } else if (markers.length == 1) {
+    handler.getMap().setZoom(14);
+  }
+});
+});
+<% end %>
+<% end %>
+
+</div>
+<!-- source/index.html.erb -->
+</div>
+</div>
+
+
+<div id="map" class="banner" style="width: 100%; height: 50vh;"></div>
+
+<div class="header-space">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-6 col-sm-offset-1">
+        <div class="header-space-details">
+          <div class="header-space-user  text-center">
+            <p><%= @space.user %></p>
+          </div>
+          <div class="header-space-name">
+            <h1><%= @space.name %></h1>
+            <p><%= @space.location %></p>
+            <i class="fa fa-star" style="color: #ffb400"></i>
+            <i class="fa fa-star" style="color: #ffb400"></i>
+            <i class="fa fa-star" style="color: #ffb400"></i>
+            <i class="fa fa-star" style="color: #ffb400"></i>
+            <i class="fa fa-star" style="color: #cacccd"></i>
+          </div>
         </div>
-        <div class="row">
-
-          <div class="col-sm-4">
-            <div class="col-xs-12">
-              <div class="list">
-                <div class="list-category"><%= @space.name %> on <%= @space.location %></div>
-                <div class="list-description">
-                  <h2><%= @space.price %> € / day</h2>
-                </div>
-
-                <%= link_to "", space_path(@space), class: "list-link" %>
+      </div>
+      <div class="col-xs-12 col-sm-4">
+        <form action="#" >
+          <h4>Book this space</h3>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-xs-6">
+                <input type="text" class="form-control" placeholder="checkin" id="checkin">
+              </div>
+              <div class="col-xs-6">
+                <input type="text" class="form-control" placeholder="checkout">
               </div>
             </div>
           </div>
-
-          <div class="col-sm-8">
-
-            <div id="map" style="width: 100%; height: 600px;"></div>
-
-            <% content_for(:after_js) do %>
-            <%= javascript_tag do %>
-            $(document).ready(function() {
-            var handler = Gmaps.build('Google');
-            handler.buildMap({ internal: { id: 'map' } }, function() {
-            markers = handler.addMarkers(<%= raw @hash.to_json %>);
-            handler.bounds.extendWith(markers);
-            handler.fitMapToBounds();
-            if (markers.length == 0) {
-            handler.getMap().setZoom(2);
-          } else if (markers.length == 1) {
-          handler.getMap().setZoom(14);
-        }
-      });
-    });
-    <% end %>
-    <% end %>
-
+          <div class="form-group">
+            <select name="" id="guests" class="form-control">
+              <option value="1">1 person</option>
+              <option value="2">2 person</option>
+              <option value="3">3 person</option>
+            </select>
           </div>
-          <!-- source/index.html.erb -->
-        </div>
+          <input type="submit" class="btn btn-primary" value="Book it" style="width: 100%">
+        </form>
       </div>
+    </div>
+  </div>
+</div>
+
+<div id="space-description">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+        <h2>About this space</h2>
+        <p>
+          This space teaches up to 3 people with the most modern techniques ad pedagogic tools to ensure you are set up to success.
+          <%= @space.name %>
+        </p>
+
+        <hr>
+        <div class="row" id="space-data">
+          <div class="col-xs-12 col-sm-2">
+            The Space
+          </div>
+          <div class="col-xs-12 col-sm-4">
+            <ul class="list-unstyled">
+              <li>Accommodates:  <strong>3</strong></li>
+              <li>Required material:  <strong>Yes</strong></li>
+              <li>Required reading:  <strong>Yes</strong></li>
+            </ul>
+          </div>
+          <div class="col-xs-12 col-sm-4">
+            <ul class="list-unstyled">
+              <li>Level:  <strong>Intermediate</strong></li>
+              <li>Course type: <strong>Group</strong></li>
+              <li>Location type: <strong>Cool spot</strong></li>
+            </ul>
+          </div>
+        </div>
+        <hr>
+        <div class="row" id="space-data">
+          <div class="col-xs-12 col-sm-2">
+            Available
+          </div>
+          <div class="col-xs-12 col-sm-4">
+            <ul class="list-unstyled">
+              <li><i class="fa fa-wrench"></i><strong>Materials</strong></li>
+              <li><i class="fa fa-wifi"></i><strong>Wifi</strong></li>
+            </ul>
+          </div>
+          <div class="col-xs-12 col-sm-4">
+            <ul class="list-unstyled">
+              <li><i class="fa fa-video-camera"></i><strong>Movie</strong></li>
+              <li><i class="fa fa-car"></i><strong>Trasportation</strong></li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
