@@ -64,7 +64,9 @@ class BookingsController < ApplicationController
     booking_params[:start_datetime] = booking_params[:start_datetime].to_datetime
     booking_params[:end_datetime] = booking_params[:end_datetime].to_datetime
 
-    booking_params[:cost] = (booking_params[:start_datetime] - booking_params[:end_datetime]).to_i * @space.price
+    unless booking_params[:start_datetime].nil? || booking_params[:end_datetime].nil?
+      booking_params[:cost] = (booking_params[:start_datetime] - booking_params[:end_datetime]).to_i * @space.price
+    end
 
     booking_params
   end

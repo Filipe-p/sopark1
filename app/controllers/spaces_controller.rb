@@ -24,6 +24,8 @@ class SpacesController < ApplicationController
       marker.lng space.longitude
       #marker.infowindow render_to_string(partial: "/flats/map_box", locals: { flat: flat })
     end
+    #Just here because of the booking form
+    @booking = Booking.new
   end
 
   def new
