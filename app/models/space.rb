@@ -6,5 +6,5 @@ class Space < ApplicationRecord
   geocoded_by :location
   after_validation :geocode, if: :location_changed?
 
-  mount_uploader :photo, PhotoUploader
+  has_attachment :photo
 end

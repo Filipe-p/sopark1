@@ -3,4 +3,6 @@
 
 <p>this is a picture -- ?</p>
 
-<%= cl_image_tag @space.photo, height: 300, width: 400, crop: :fill %>
+<% if @space.photo? %>
+  <%= cl_image_tag @space.photo.path, width: 200, height: 300, crop: :fill %>
+<% end %>
