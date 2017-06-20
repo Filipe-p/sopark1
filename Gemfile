@@ -33,6 +33,9 @@ gem 'cloudinary', '1.1.7'
 gem 'attachinary', github: 'assembler/attachinary'
 gem 'jquery-fileupload-rails'
 
+gem 'money-rails'
+gem 'stripe'
+
 group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'

@@ -104,6 +104,7 @@ handler.getMap().setZoom(14);
 
         <div class="row" id="space-data">
           <div class="col-xs-12 col-sm-2">
+          <p>Gold Coins: <%= humanized_money_with_symbol(@space.price) %></p>
             <p>this is a picture -- ?</p>
               <% if @space.photo? %>
                 <%= cl_image_tag @space.photo.path, width: 200, height: 300, crop: :fill %>
