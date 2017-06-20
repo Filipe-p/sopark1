@@ -1,8 +1,14 @@
 class SpacesController < ApplicationController
   before_action :set_space, only: [:show, :edit, :update, :destroy]
+  skip_before_action :authenticate_user!, only: [:index, :show]
 
   def index
-    @spaces = Space.all
+    if params.has_key?(:search) && params[:search][:location] != ""
+        @spaces = @spaces.where(location: params[:search][:location].capitalize)
+    else
+      @spaces = Space.all
+    end
+
   end
 
   def show
@@ -35,7 +41,7 @@ class SpacesController < ApplicationController
 
   def destroy
     @space.destroy
-    redirect_to space_path
+    redirect_to spaces_path
   end
 
   private
