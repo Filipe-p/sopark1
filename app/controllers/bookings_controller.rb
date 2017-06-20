@@ -26,7 +26,7 @@ class BookingsController < ApplicationController
       redirect_to space_booking_path(@space, @booking)
     else
       # render :new
-      render :new
+      render 'spaces/show'
     end
   end
 

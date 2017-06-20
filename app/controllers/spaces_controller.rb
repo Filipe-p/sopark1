@@ -58,6 +58,7 @@ class SpacesController < ApplicationController
     redirect_to spaces_path
   end
 
+
   private
 
   def set_space
