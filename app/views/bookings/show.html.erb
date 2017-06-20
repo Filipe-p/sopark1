@@ -1,2 +1,10 @@
 <h1>Bookings#show</h1>
 <p>Find me in app/views/bookings/show.html.erb</p>
+
+<p> link to payments</p>
+
+<!-- app/views/payments/new.html.erb -->
+<h1>Booking of space <%= @space.name %></h1>
+<p> Location <%= @space.location %></p>
+<p> price <%= @space.price %></p>
+<%= link_to new_space_booking_payment_path(@space, @booking), class: "btn btn-primary"%>

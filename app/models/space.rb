@@ -7,4 +7,6 @@ class Space < ApplicationRecord
   after_validation :geocode, if: :location_changed?
 
   has_attachment :photo
+
+  monetize :price_cents
 end
