@@ -1,0 +1,45 @@
+/* Card design */
+.list {
+  height: 100px;
+  background-size: cover !important;
+  background-color: white;
+  border: 1px solid #e4e8ea;
+  position: relative;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+.list-user {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+.list-category {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 20px;
+}
+.list-description {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+}
+.list-description h2 {
+  font-size: 22px;
+}
+.list-description p {
+  font-size: 15px;
+  }
+.list-link {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  z-index:2;
+  background: black;
+  opacity: 0;
+}
+.list-link:hover{
+  opacity: 0.1;
+}

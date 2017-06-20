@@ -4,14 +4,28 @@ class SpacesController < ApplicationController
 
   def index
     if params.has_key?(:search) && params[:search][:location] != ""
-        @spaces = @spaces.where(location: params[:search][:location].capitalize)
+        @spaces = Space.where(location: params[:search][:location].capitalize)
     else
       @spaces = Space.all
     end
 
+    @spaces = @spaces.where.not(latitude: nil, longitude: nil)
+
+    @hash = Gmaps4rails.build_markers(@spaces) do |space, marker|
+      marker.lat space.latitude
+      marker.lng space.longitude
+      #marker.infowindow render_to_string(partial: "/flats/map_box", locals: { flat: flat })
+    end
   end
 
   def show
+    @hash = Gmaps4rails.build_markers(@space) do |space, marker|
+      marker.lat space.latitude
+      marker.lng space.longitude
+      #marker.infowindow render_to_string(partial: "/flats/map_box", locals: { flat: flat })
+    end
+    #Just here because of the booking form
+    @booking = Booking.new
   end
 
   def new
@@ -43,6 +57,7 @@ class SpacesController < ApplicationController
     @space.destroy
     redirect_to spaces_path
   end
+
 
   private
 

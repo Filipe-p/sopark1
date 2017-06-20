@@ -1,8 +1,117 @@
-<h1>Spaces#show</h1>
-<p>Find me in app/views/spaces/show.html.erb</p>
-
-<p>this is a picture -- ?</p>
-
-<% if @space.photo? %>
-  <%= cl_image_tag @space.photo.path, width: 200, height: 300, crop: :fill %>
+<% content_for(:after_js) do %>
+<%= javascript_tag do %>
+$(document).ready(function() {
+var handler = Gmaps.build('Google');
+handler.buildMap({ internal: { id: 'map' } }, function() {
+markers = handler.addMarkers(<%= raw @hash.to_json %>);
+handler.bounds.extendWith(markers);
+handler.fitMapToBounds();
+if (markers.length == 0) {
+handler.getMap().setZoom(2);
+} else if (markers.length == 1) {
+handler.getMap().setZoom(14);
+}
+});
+});
 <% end %>
+<% end %>
+
+</div>
+<!-- source/index.html.erb -->
+</div>
+</div>
+
+
+<div id="map" class="banner" style="width: 100%; height: 50vh;"></div>
+
+<div class="header-space">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-6 col-sm-offset-1">
+        <div class="header-space-details">
+          <div class="header-space-user  text-center">
+          </div>
+          <div class="header-space-name">
+            <h1><%= @space.name %></h1>
+            <p><%= @space.location %></p>
+            <i class="fa fa-star" style="color: #ffb400"></i>
+            <i class="fa fa-star" style="color: #ffb400"></i>
+            <i class="fa fa-star" style="color: #ffb400"></i>
+            <i class="fa fa-star" style="color: #ffb400"></i>
+            <i class="fa fa-star" style="color: #cacccd"></i>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-4">
+
+        <h4>Book this space</h4>
+        <%= render "bookings/form" %>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="space-description">
+  <div class="container">
+    <div class="row">
+
+      <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+        <h2>About this space</h2>
+        <p>
+          This space teaches up to 3 people with the most modern techniques ad pedagogic tools to ensure you are set up to success.
+          <%= @space.name %>
+        </p>
+
+        <hr>
+        <div class="row" id="space-data">
+          <div class="col-xs-12 col-sm-2">
+            The Space
+          </div>
+          <div class="col-xs-12 col-sm-4">
+            <ul class="list-unstyled">
+              <li>Accommodates:  <strong>3</strong></li>
+              <li>Required material:  <strong>Yes</strong></li>
+              <li>Required reading:  <strong>Yes</strong></li>
+            </ul>
+          </div>
+          <div class="col-xs-12 col-sm-4">
+            <ul class="list-unstyled">
+              <li>Level:  <strong>Intermediate</strong></li>
+              <li>Course type: <strong>Group</strong></li>
+              <li>Location type: <strong>Cool spot</strong></li>
+            </ul>
+          </div>
+        </div>
+        <hr>
+        <div class="row" id="space-data">
+          <div class="col-xs-12 col-sm-2">
+            Available
+          </div>
+          <div class="col-xs-12 col-sm-4">
+            <ul class="list-unstyled">
+              <li><i class="fa fa-wrench"></i><strong>Materials</strong></li>
+              <li><i class="fa fa-wifi"></i><strong>Wifi</strong></li>
+            </ul>
+          </div>
+          <div class="col-xs-12 col-sm-4">
+            <ul class="list-unstyled">
+              <li><i class="fa fa-video-camera"></i><strong>Movie</strong></li>
+              <li><i class="fa fa-car"></i><strong>Trasportation</strong></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="row" id="space-data">
+          <div class="col-xs-12 col-sm-2">
+            <p>this is a picture -- ?</p>
+              <% if @space.photo? %>
+                <%= cl_image_tag @space.photo.path, width: 200, height: 300, crop: :fill %>
+              <% end %>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
