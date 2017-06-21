@@ -19,7 +19,7 @@ class BookingsController < ApplicationController
 
     @booking.space = @space
     @booking.user_id = current_user.id
-    @booking.state = 'Pending'
+    @booking.state = 'pending'
 
     # @booking = @space.bookings.build(booking_params)
 

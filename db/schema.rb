@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(version: 20170620135811) do
     t.datetime "updated_at",              null: false
     t.float    "latitude"
     t.float    "longitude"
+    t.float    "price"
     t.string   "photo"
     t.integer  "price_cents", default: 0, null: false
     t.index ["user_id"], name: "index_spaces_on_user_id", using: :btree
