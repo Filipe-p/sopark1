@@ -1,50 +1,50 @@
 <div class="container">
-        <div class="row">
-          <h2 class="text-center">Your next parking spot</h2>
-        </div>
-        <div class="row">
+  <div class="row">
+    <h2 class="text-center">Your next parking spot</h2>
+  </div>
+  <div class="row">
 
-          <div class="col-sm-4">
-            <% @spaces.each do |space| %>
-            <div class="col-xs-12">
-              <div class="list">
-                <div class="list-category"><%= space.name %> on <%= space.location %></div>
-                <div class="list-description">
-                  <h2><%= space.price %> € / day</h2>
-                </div>
-
-                <%= link_to "", space_path(space), class: "list-link" %>
-              </div>
-            </div>
-            <% end %>
+    <div class="col-sm-4">
+      <% @spaces.each do |space| %>
+      <div class="col-xs-12">
+        <div class="list">
+          <div class="list-category"><%= space.name %> on <%= space.location %></div>
+          <div class="list-description">
+            <h2><%= space.price %> € / day</h2>
           </div>
 
-          <div class="col-sm-8">
+          <%= link_to "", space_path(space), class: "list-link" %>
+        </div>
+      </div>
+      <% end %>
+    </div>
 
-            <div id="map" style="width: 100%; height: 600px;"></div>
+    <div class="col-sm-8">
 
-            <% content_for(:after_js) do %>
-            <%= javascript_tag do %>
-            $(document).ready(function() {
-            var handler = Gmaps.build('Google');
-            handler.buildMap({ internal: { id: 'map' } }, function() {
+      <div id="map" style="width: 100%; height: 600px;"></div>
+
+      <% content_for(:after_js) do %>
+      <script>
+        $(document).ready(function() {
+          var handler = Gmaps.build('Google');
+          handler.buildMap({ internal: { id: 'map' } }, function() {
             markers = handler.addMarkers(<%= raw @hash.to_json %>);
             handler.bounds.extendWith(markers);
             handler.fitMapToBounds();
             if (markers.length == 0) {
-            handler.getMap().setZoom(2);
-          } else if (markers.length == 1) {
-          handler.getMap().setZoom(14);
-        }
-      });
-    });
-    <% end %>
-    <% end %>
+              handler.getMap().setZoom(2);
+            } else if (markers.length == 1) {
+              handler.getMap().setZoom(14);
+            }
+          });
+        });
+      </script>
+      <% end %>
 
-          </div>
-          <!-- source/index.html.erb -->
-        </div>
-      </div>
+    </div>
+    <!-- source/index.html.erb -->
+  </div>
+</div>
 
 
 
