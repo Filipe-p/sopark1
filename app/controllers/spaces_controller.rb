@@ -4,7 +4,7 @@ class SpacesController < ApplicationController
 
   def index
     if params.has_key?(:search) && params[:search][:location] != ""
-        @spaces = Space.where(location: params[:search][:location].capitalize)
+        @spaces = Space.where(location: params[:search][:location].downcase)
     else
       @spaces = Space.all
     end
@@ -26,6 +26,8 @@ class SpacesController < ApplicationController
     end
     #Just here because of the booking form
     @booking = Booking.new
+    #Just here because of the review form
+    @review = Review.new
   end
 
   def new
@@ -67,6 +69,8 @@ class SpacesController < ApplicationController
 
   def space_params
     space_params = params.require(:space).permit(:name, :location, :user, :covered, :staff, :valet, :gate, :cctv, :charging, :water, :price, :photo, :price_cents)
+    space_params[:location] = space_params[:location].downcase
+    space_params
   end
 
 end

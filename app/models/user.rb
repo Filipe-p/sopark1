@@ -5,11 +5,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   has_many :cars, dependent: :destroy
   has_many :spaces, dependent: :destroy
-  has_many :bookings
 
-
-
-
+  has_many :bookings, dependent: :destroy
+  has_many :reviews, dependent: :destroy
 
   devise :omniauthable, omniauth_providers: [:facebook]
 
@@ -34,3 +32,4 @@ class User < ApplicationRecord
     return user
   end
 end
+
