@@ -1,9 +1,10 @@
 class User < ApplicationRecord
-  after_create :send_welcome_email
+  # after_create :send_welcome_email
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable,
+         :confirmable
   has_many :cars, dependent: :destroy
   has_many :spaces, dependent: :destroy
 
@@ -27,6 +28,8 @@ class User < ApplicationRecord
     else
       user = User.new(user_params)
       user.password = Devise.friendly_token[0,20]  # Fake password for validation
+      # skip confirmation for devise if user comes from provider that confirms emails
+      user.skip_confirmation!
       user.save
     end
 
@@ -35,6 +38,7 @@ class User < ApplicationRecord
 
   private
 
+  #this is what sends the email in the begining of this model and connects the model to the email through the UserMailer
   def send_welcome_email
     UserMailer.welcome(self).deliver_now
   end
