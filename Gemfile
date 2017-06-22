@@ -37,6 +37,7 @@ gem 'stripe'
 gem 'omniauth-facebook'
 
 group :development, :test do
+  gem "letter_opener"
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'listen', '~> 3.0.5'
