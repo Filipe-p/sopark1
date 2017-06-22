@@ -45,11 +45,12 @@ $(document).ready(function() {
           <div class="header-space-name">
             <h1><%= @space.name %></h1>
             <p><%= @space.location %></p>
-            <i class="fa fa-star" style="color: #ffb400"></i>
-            <i class="fa fa-star" style="color: #ffb400"></i>
-            <i class="fa fa-star" style="color: #ffb400"></i>
-            <i class="fa fa-star" style="color: #ffb400"></i>
-            <i class="fa fa-star" style="color: #cacccd"></i>
+              <% (@space.rating).times do %>
+              <i class="fa fa-star" style="color: #ffb400"></i>
+              <% end %>
+              <% (5-@space.rating).times do %>
+              <i class="fa fa-star"></i>
+              <% end %>
           </div>
         </div>
       </div>
@@ -122,6 +123,23 @@ $(document).ready(function() {
               <% end %>
           </div>
         </div>
+
+        <% @space.reviews.each do |review| %>
+          <h1><%= review.user.email %></h1>
+          <p>
+            <% (review.rating).times do %>
+              <i class="fa fa-star" style="color: #ffb400"></i>
+              <% end %>
+              <% (5-review.rating).times do %>
+              <i class="fa fa-star"></i>
+            <% end %>
+          </p>
+
+          <p> <%= review.content %></p>
+
+        <% end %>
+
+        <%= render "reviews/form" %>
 
       </div>
     </div>

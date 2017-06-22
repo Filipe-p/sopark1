@@ -1,0 +1,5 @@
+<%= simple_form_for([@space, @review]) do |f| %>
+  <%= f.input :content, placeholder: "How was your experience with this space?" %>
+  <%= f.input :rating, collection: 0..5 %>
+  <%= f.submit "Post review", class: "btn btn-primary" %>
+<% end %>
