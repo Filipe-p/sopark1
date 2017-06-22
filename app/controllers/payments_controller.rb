@@ -18,6 +18,7 @@ class PaymentsController < ApplicationController
     )
 
     @booking.update(payment: charge.to_json, state: 'paid')
+    PaymentMailer.payment_confirmation(@space, @booking).deliver_now
     redirect_to space_booking_path(@space, @booking)
 
   rescue Stripe::CardError => e
