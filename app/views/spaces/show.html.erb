@@ -81,16 +81,17 @@ $(document).ready(function() {
           </div>
           <div class="col-xs-12 col-sm-4">
             <ul class="list-unstyled">
-              <li>Accommodates:  <strong>3</strong></li>
-              <li>Required material:  <strong>Yes</strong></li>
-              <li>Required reading:  <strong>Yes</strong></li>
+              <li>Covered:  <strong><%= @space.covered ? 'Yes' : 'No' %></strong></li>
+              <li>Staff  <strong><%= @space.staff ? 'Yes' : 'No' %></strong></li>
+              <li>Charging  <strong><%= @space.charging ? 'Yes' : 'No' %></strong></li>
+              <li>Gate  <strong><%= @space.gate ? 'Yes' : 'No' %></strong></li>
             </ul>
           </div>
           <div class="col-xs-12 col-sm-4">
             <ul class="list-unstyled">
-              <li>Level:  <strong>Intermediate</strong></li>
-              <li>Course type: <strong>Group</strong></li>
-              <li>Location type: <strong>Cool spot</strong></li>
+              <li>CCTV <strong><%= @space.cctv ? 'Yes' : 'No' %></strong></li>
+              <li>Valet:  <strong><%= @space.valet ? 'Yes' : 'No' %></strong></li>
+              <li>Water  <strong><%= @space.water ? 'Yes' : 'No' %></strong></li>
             </ul>
           </div>
         </div>
