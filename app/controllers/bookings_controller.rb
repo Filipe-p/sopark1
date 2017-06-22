@@ -24,7 +24,7 @@ class BookingsController < ApplicationController
     # @booking = @space.bookings.build(booking_params)
 
     if @booking.save
-      redirect_to space_booking_path(@space, @booking)
+      redirect_to new_space_booking_payment_path(@space, @booking)
     else
       # render :new
       render 'spaces/show'

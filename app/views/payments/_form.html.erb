@@ -1,0 +1,15 @@
+<div class="form">
+
+<%= form_tag space_booking_payments_path(@space, @booking) do %>
+
+    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+    data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+    data-name="<%= @space.name %>"
+    data-email="<%= current_user.email %>"
+    data-description="Space <%= @space.id %>"
+    data-amount="<%= @booking.cost_cents %>"
+    data-currency="<%= @booking.cost.currency %>"></script>
+
+
+  <% end %>
+</div>
