@@ -11,6 +11,9 @@ class BookingsController < ApplicationController
 
   def new
     @booking = Booking.new
+
+    # I need to unselect certain dates
+    # @unavailable_dates = @space.unavailable_dates
   end
 
   def create
@@ -66,7 +69,7 @@ class BookingsController < ApplicationController
     booking_params[:end_datetime] = booking_params[:end_datetime].to_datetime
 
     unless booking_params[:start_datetime].nil? || booking_params[:end_datetime].nil?
-      booking_params[:cost] = (booking_params[:end_datetime] - booking_params[:start_datetime]).to_i * @space.price
+      booking_params[:cost] = (booking_params[:end_datetime] - booking_params[:start_datetime] + 1).to_i * @space.price
     end
 
     booking_params

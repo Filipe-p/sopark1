@@ -6,3 +6,18 @@
 
   <%= f.submit "Go", class: "btn btn-lg btn-primary"%>
 <% end %>
+
+
+
+<% content_for(:after_js) do %>
+
+<script>
+$(document).ready(function() {
+  $('.datepicker').datepicker({
+    format: 'dd/mm/yyyy',
+    autoclose: true
+  });
+})
+</script>
+
+<% end %>

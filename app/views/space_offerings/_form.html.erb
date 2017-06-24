@@ -1,0 +1,41 @@
+<div class="form">
+  <%= simple_form_for([@space, @space_offering]) do |f| %>
+
+  <!-- Ficheiro do dono das garagens -->
+
+  <!-- Ideias:
+      - Bloquear reservas no próprio dia?
+      - Bloquear reservas para mais de 6 meses em avanço? (permitir reservas para os próximos 6 meses)
+      - Bloquear reservas para menos de 3 meses em avanço? (permitir apenas reservas que comecem daqui a 3 meses)
+      - Bloquear determinadas datas?
+      - Bloquear fins de semana?
+   -->
+
+
+            <div class="row">
+              <div class="col-xs-6">
+  <%= f.input :start_datetime, as: :string, input_html: {class: "datepicker"}, placeholder: "From", label_html: {class: 'hidden'} %>
+  </div>
+              <div class="col-xs-6">
+  <%= f.input :end_datetime, as: :string, input_html: {class: "datepicker"}, placeholder: "Until", label_html: {class: 'hidden'} %>
+   </div>
+            </div>
+
+          </div>
+  <%= f.input :price, as: :float, input_html: { placeholder: "How much per day?" } %>
+  <%= f.submit "Offer your space", class: "btn btn-primary full" %>
+  <% end %>
+</div>
+
+<% content_for(:after_js) do %>
+
+<script>
+$(document).ready(function() {
+  $('.datepicker').datepicker({
+    format: 'dd/mm/yyyy',
+    autoclose: true
+  });
+})
+</script>
+
+<% end %>

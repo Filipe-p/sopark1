@@ -2,17 +2,34 @@
   <%= simple_form_for([@space, @booking]) do |f| %>
 
 
-            <div class="row">
-              <div class="col-xs-6">
-  <%= f.input :start_datetime, as: :string, input_html: {class: "datepicker"}, placeholder: "From", label_html: {class: 'hidden'} %>
+  <div class="row">
+    <div class="col-xs-6">
+      <%= f.input :start_datetime, as: :string, input_html: {class: "datepicker"}, placeholder: "From", label_html: {class: 'hidden'} %>
+    </div>
+    <div class="col-xs-6">
+      <%= f.input :end_datetime, as: :string, input_html: {class: "datepicker"}, placeholder: "Until", label_html: {class: 'hidden'} %>
+    </div>
   </div>
-              <div class="col-xs-6">
-  <%= f.input :end_datetime, as: :string, input_html: {class: "datepicker"}, placeholder: "Until", label_html: {class: 'hidden'} %>
-   </div>
-            </div>
 
-          </div>
-  <%= f.submit "Book it", class: "btn btn-primary full" %>
-  <% end %>
+</div>
+<%= f.submit "Book it", class: "btn btn-primary full" %>
+<% end %>
 </div>
 
+<% content_for(:after_js) do %>
+
+
+  <script>
+
+
+    $(document).ready(function() {
+      $('.datepicker').datepicker({
+        format: 'dd/mm/yyyy',
+        startDate: Date(
+          <%= Date.today %>
+          )
+      });
+    })
+  </script>
+
+<% end %>

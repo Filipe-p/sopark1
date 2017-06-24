@@ -28,6 +28,9 @@ class SpacesController < ApplicationController
     @booking = Booking.new
     #Just here because of the review form
     @review = Review.new
+
+    # Just here to pass the available dates to the date picker
+    # @unavailable_dates = @space.unavailable_dates
   end
 
   def new
@@ -38,7 +41,7 @@ class SpacesController < ApplicationController
     @space = Space.new(space_params)
     @space.user = current_user
     if @space.save
-      redirect_to space_path(@space)
+      redirect_to space_path(@space) # I need to redirect to the create new offering page
     else
       render :new
     end

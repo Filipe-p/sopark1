@@ -1,0 +1,20 @@
+<h1>SpaceOfferings#index</h1>
+
+<table class="table">
+  <tr>
+    <th>Name</th>
+    <th>Location</th>
+    <th>Start date</th>
+    <th>End date</th>
+    <th>Owner</th>
+  </tr>
+  <% @space_offerings.each do |offering| %>
+  <tr>
+    <td><%= offering.space.name %></td>
+    <td><%= offering.space.location %></td>
+    <td><%= offering.start_datetime %></td>
+    <td><%= offering.end_datetime %></td>
+    <td><%= offering.user.email %></td>
+  </tr>
+  <% end %>
+</table>

@@ -7,3 +7,7 @@ class Booking < ApplicationRecord
 
   monetize :cost_cents
 end
+
+
+#validate if booking date is overdue
+#validate is booking dates are available
