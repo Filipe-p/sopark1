@@ -39,8 +39,10 @@ class Space < ApplicationRecord
   def booking_dates
     result = []
     self.bookings.each do |booking|
-      demand = (booking.start_datetime..booking.end_datetime).to_a
-      result += demand
+      if booking.state == "paid"
+        demand = (booking.start_datetime..booking.end_datetime).to_a
+        result += demand
+      end
     end
     result = result.uniq # to prevent space offerings from overlapping -- should be changed in space offerings to prevent submission
     result.sort
@@ -74,7 +76,7 @@ class Space < ApplicationRecord
   end
 
   def reserved_dates
-    ((self.start_date..self.end_date).to_a - offering_dates)).sort
+    ((self.start_date..self.end_date).to_a - offering_dates).sort
   end
 
   def unavailable_dates
