@@ -4,10 +4,10 @@
 
   <div class="row">
     <div class="col-xs-6">
-      <%= f.input :start_datetime, as: :string, input_html: {class: "datepicker"}, placeholder: "From", label_html: {class: 'hidden'} %>
+      <%= f.input :start_datetime, as: :string, input_html: {class: "bookingdatepicker"}, placeholder: "From", label_html: {class: 'hidden'} %>
     </div>
     <div class="col-xs-6">
-      <%= f.input :end_datetime, as: :string, input_html: {class: "datepicker"}, placeholder: "Until", label_html: {class: 'hidden'} %>
+      <%= f.input :end_datetime, as: :string, input_html: {class: "bookingdatepicker"}, placeholder: "Until", label_html: {class: 'hidden'} %>
     </div>
   </div>
 
@@ -21,13 +21,39 @@
 
   <script>
 
+    <% @space.start_date.nil? ? min_date = Date.today : min_date = [Date.today, @space.start_date].max %>
+    <% max_date = @space.end_date %>
+
+    <% disabled_dates = @space.unavailable_dates %>
+    var result = [];
+
+    <% disabled_dates.each do |date| %>
+
+      var element = new Date(
+          <%= date.year %>,
+          <%= date.month - 1 %>,
+          <%= date.day + 1 %>
+        );
+
+      result.push(element);
+
+    <% end %>
 
     $(document).ready(function() {
-      $('.datepicker').datepicker({
+      $('.bookingdatepicker').datepicker({
         format: 'dd/mm/yyyy',
-        startDate: Date(
-          <%= Date.today %>
-          )
+        startDate: new Date(
+          <%= min_date.year %>,
+          <%= min_date.month - 1 %>,
+          <%= min_date.day %>
+        ),
+        autoclose: true,
+        endDate: new Date(
+          <%= max_date.year %>,
+          <%= max_date.month - 1 %>,
+          <%= max_date.day %>
+        ),
+        datesDisabled: result
       });
     })
   </script>

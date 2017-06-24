@@ -1,10 +1,10 @@
 <%= simple_form_for :search,  url: spaces_path, method: "get", html: {class: 'form-inline'} do |f| %>
-  <%= f.input :location, placeholder: "Location", label_html: {class: 'hidden'}, input_html: { class: "input-lg" }%>
+<%= f.input :location, placeholder: "Location", label_html: {class: 'hidden'}, input_html: { class: "input-lg" }%>
 
-  <%= f.input :start_date, as: :string, input_html: {class: "datepicker input-lg"}, placeholder: "From", label_html: {class: 'hidden'} %>
-  <%= f.input :end_date, as: :string, input_html: {class: "datepicker input-lg"}, placeholder: "Until", label_html: {class: 'hidden'} %>
+<%= f.input :start_date, as: :string, input_html: {class: "datepicker input-lg"}, placeholder: "From", label_html: {class: 'hidden'} %>
+<%= f.input :end_date, as: :string, input_html: {class: "datepicker input-lg"}, placeholder: "Until", label_html: {class: 'hidden'} %>
 
-  <%= f.submit "Go", class: "btn btn-lg btn-primary"%>
+<%= f.submit "Go", class: "btn btn-lg btn-primary"%>
 <% end %>
 
 
@@ -12,12 +12,20 @@
 <% content_for(:after_js) do %>
 
 <script>
-$(document).ready(function() {
-  $('.datepicker').datepicker({
-    format: 'dd/mm/yyyy',
-    autoclose: true
-  });
-})
+
+  <% min_date = Date.today %>
+
+  $(document).ready(function() {
+    $('.bookingdatepicker').datepicker({
+      format: 'dd/mm/yyyy',
+      startDate: new Date(
+        <%= min_date.year %>,
+        <%= min_date.month - 1 %>,
+        <%= min_date.day %>
+        ),
+      autoclose: true
+    });
+  })
 </script>
 
 <% end %>

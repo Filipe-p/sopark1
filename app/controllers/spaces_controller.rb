@@ -41,7 +41,7 @@ class SpacesController < ApplicationController
     @space = Space.new(space_params)
     @space.user = current_user
     if @space.save
-      redirect_to space_path(@space) # I need to redirect to the create new offering page
+      redirect_to new_space_space_offering_path(@space) # I need to redirect to the create new offering page
     else
       render :new
     end
