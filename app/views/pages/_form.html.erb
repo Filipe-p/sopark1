@@ -16,7 +16,7 @@
   <% min_date = Date.today %>
 
   $(document).ready(function() {
-    $('.bookingdatepicker').datepicker({
+    $('.datepicker').datepicker({
       format: 'dd/mm/yyyy',
       startDate: new Date(
         <%= min_date.year %>,
