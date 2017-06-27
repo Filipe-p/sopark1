@@ -17,20 +17,29 @@ class BookingsController < ApplicationController
   end
 
   def create
+    @review = Review.new
     # redirect to confirmation
     @booking = Booking.new(booking_params)
 
     @booking.space = @space
     @booking.user_id = current_user.id
-    @booking.state = 'pending'
 
-    # @booking = @space.bookings.build(booking_params)
-
-    if @booking.save
-      redirect_to new_space_booking_payment_path(@space, @booking)
-    else
-      # render :new
-      render 'spaces/show'
+    if @booking.user == @space.user #User is owner
+      @booking.state = 'reserved'
+      if @booking.save
+        redirect_to space_bookings_path(@space, @booking)
+      else
+        # render :new
+        render 'spaces/show'
+      end
+    elsif @booking.user != @space.user #User is not owner
+      @booking.state = 'pending'
+      if @booking.save
+        redirect_to new_space_booking_payment_path(@space, @booking)
+      else
+        # render :new
+        render 'spaces/show'
+      end
     end
   end
 
@@ -39,12 +48,22 @@ class BookingsController < ApplicationController
 
   def update
 
-    # redirect to confirmation
-    if @booking.update(booking_params)
-      redirect_to space_booking_path(@space, @booking)
-    else
-      render :new
+    if @booking.user == @space.user #User is owner
+      if @booking.update(booking_params)
+        redirect_to space_booking_path(@space, @booking)
+      else
+        render :new
+      end
+    elsif @booking.user != @space.user #User is not owner
+      if @booking.update(booking_params)
+        redirect_to space_booking_path(@space, @booking)
+      else
+        render :new
+      end
     end
+
+    # redirect to confirmation
+
   end
 
   def destroy
@@ -65,13 +84,12 @@ class BookingsController < ApplicationController
   def booking_params
     booking_params = params.require(:booking).permit(:start_datetime, :end_datetime, :cost, :status)
 
-    booking_params[:start_datetime] = booking_params[:start_datetime].to_datetime
-    booking_params[:end_datetime] = booking_params[:end_datetime].to_datetime
-
-    unless booking_params[:start_datetime].nil? || booking_params[:end_datetime].nil?
+    unless (booking_params[:start_datetime] == "" || booking_params[:end_datetime] == "")
+      booking_params[:start_datetime] = booking_params[:start_datetime].to_date #time
+      booking_params[:end_datetime] = booking_params[:end_datetime].to_date #time
       booking_params[:cost] = (booking_params[:end_datetime] - booking_params[:start_datetime] + 1).to_i * @space.price
     end
-
     booking_params
   end
+
 end

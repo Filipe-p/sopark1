@@ -3,3 +3,4 @@ class AddPriceMonitizeToSpaces < ActiveRecord::Migration[5.0]
     add_monetize :spaces, :price, currency: { present: false }
   end
 end
+

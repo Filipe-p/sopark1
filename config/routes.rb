@@ -4,7 +4,6 @@ Rails.application.routes.draw do
 
   resources :spaces do
     resources :reviews
-    resources :space_offerings
     resources :bookings do
       resources :payments
     end

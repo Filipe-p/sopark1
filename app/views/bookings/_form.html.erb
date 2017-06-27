@@ -21,8 +21,8 @@
 
   <script>
 
-    <% @space.start_date.nil? ? min_date = Date.today : min_date = [Date.today, @space.start_date].max %>
-    <% max_date = @space.end_date %>
+    <% min_date = Date.today %>
+    <% max_date = Date.today + 6.months %>
 
     <% disabled_dates = @space.unavailable_dates %>
     var result = [];
