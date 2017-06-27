@@ -4,7 +4,7 @@ class SpacesController < ApplicationController
 
   def index
     if params.has_key?(:search) && params[:search][:location] != ""
-        @spaces = Space.where(location: params[:search][:location].downcase)
+        @spaces = Space.where(location: params[:search][:location])
     else
       @spaces = Space.all
     end
@@ -28,6 +28,9 @@ class SpacesController < ApplicationController
     @booking = Booking.new
     #Just here because of the review form
     @review = Review.new
+
+    # Just here to pass the available dates to the date picker
+    # @unavailable_dates = @space.unavailable_dates
   end
 
   def new
@@ -38,7 +41,7 @@ class SpacesController < ApplicationController
     @space = Space.new(space_params)
     @space.user = current_user
     if @space.save
-      redirect_to space_path(@space)
+      redirect_to space_path(@space) # I need to redirect the user to the dashboard
     else
       render :new
     end
@@ -68,8 +71,7 @@ class SpacesController < ApplicationController
   end
 
   def space_params
-    space_params = params.require(:space).permit(:name, :location, :user, :covered, :staff, :valet, :gate, :cctv, :charging, :water, :price, :photo, :price_cents)
-    space_params[:location] = space_params[:location].downcase
+    space_params = params.require(:space).permit(:name, :location, :user, :covered, :staff, :valet, :gate, :cctv, :charging, :water, :price, :photo, :price_cents, :price)
     space_params
   end
 
