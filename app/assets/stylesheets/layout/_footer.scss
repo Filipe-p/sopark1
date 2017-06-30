@@ -20,6 +20,24 @@ html, body {
   height: 142px;
 }
 .footer {
-  background: #0078B6;
-  color: white;
+  background: #4e5254;
+  padding: 13px 30px;
+  color: #CCCCCC;
+}
+
+.footer p {
+  margin-top: 17px;
+}
+.footer ul {
+  margin-top: 10px;
+}
+.footer a {
+  color: #CCCCCC;
+  font-size: 10px;
+  letter-spacing: 5px;
+  transition: color 0.5s ease;
+  text-decoration: none;
+}
+.footer a:hover{
+  color: #D23333;
 }
