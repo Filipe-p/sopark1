@@ -1,17 +1,28 @@
 <div class="form">
   <%= simple_form_for @space do |f| %>
   <%= f.input :name, input_html: { placeholder: "Name your space" } %>
+
+  <h2>Where is you space?</h2>
   <%= f.input :location, input_html: { placeholder: "Where is it?" } %>
+  <%= f.input :zip_code, input_html: { placeholder: "Ex. 1600" } %>
+  <%= f.input :house_number, input_html: { placeholder: "Ex.7" } %>
+  <%= f.input :street, input_html: { placeholder: "Ex. Rua Rosa" } %>
+  <%= f.input :city_town, input_html: { placeholder: "Ex. Lisboa" } %>
+<!-- missing country but breaking -->
 
-  <%= f.input :price, as: :float, input_html: { placeholder: "How much per day?" } %>
-
-  <%= f.input :covered, as: :boolean, checked_value: true, unchecked_value: false %>
+  <h2>About the space</h2>
+    <%= f.input :covered, as: :boolean, checked_value: true, unchecked_value: false %>
   <%= f.input :staff, as: :boolean, checked_value: true, unchecked_value: false %>
   <%= f.input :valet, as: :boolean, checked_value: true, unchecked_value: false %>
   <%= f.input :gate, as: :boolean, checked_value: true, unchecked_value: false %>
   <%= f.input :cctv, as: :boolean, checked_value: true, unchecked_value: false %>
   <%= f.input :charging, as: :boolean, checked_value: true, unchecked_value: false %>
   <%= f.input :water, as: :boolean, checked_value: true, unchecked_value: false %>
+
+  <h2>Description and Notes</h2>
+  <%= f.input :price, as: :float, input_html: { placeholder: "How much per day?" } %>
+
+
   <%= f.input :photo, as: :attachinary %>
 
   <%= f.submit class: "btn btn-primary" %>
