@@ -24,6 +24,10 @@ end
 
 gem "geocoder"
 
+# gem "elasticsearch-rails"
+# gem "elasticsearch-model"
+
+
 gem "coffee-rails"
 gem "gmaps4rails"
 
