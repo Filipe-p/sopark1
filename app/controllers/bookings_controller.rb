@@ -22,7 +22,7 @@ class BookingsController < ApplicationController
     @booking = Booking.new(booking_params)
 
     @booking.space = @space
-    @booking.user_id = current_user.id
+    @booking.user = current_user
 
     if @booking.user == @space.user #User is owner
       @booking.state = 'reserved'

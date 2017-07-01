@@ -1,0 +1,71 @@
+$bg-color-subnavbar: #2D76B8;
+$text-color-subnavbar: #999999;
+
+// cinzento airbnb #484848
+// azul azapark #0C79BE
+// branco azapark #FFF
+
+$color-azpk: #FFF;
+$secondary-color-azpk: #6AD58B;
+$opacity-subnavbar: 1;
+
+
+.tabs {
+  background: $bg-color-subnavbar;
+  opacity: $opacity-subnavbar;
+  display: flex;
+  align-items: center;
+  padding: 10px 10 0 10px
+}
+
+.tabs a {
+  color: $color-azpk;
+}
+
+.tabs a:hover {
+  cursor: pointer;
+  text-decoration: none;
+  opacity: $opacity-subnavbar;
+  background: $bg-color-subnavbar;
+  color: $color-azpk;
+  padding-bottom: 5px;
+  border-bottom: 5px solid $color-azpk;
+}
+
+.tabs p {
+  // opacity: 0.5;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.tab {
+  opacity: $opacity-subnavbar;
+  background: $bg-color-subnavbar;
+  flex: 0 0 auto;
+  text-align: center;
+  padding: 10px 10px;
+}
+
+.tab.active {
+  opacity: $opacity-subnavbar;
+  background: $bg-color-subnavbar;
+  color: $color-azpk;
+  padding-bottom: 5px;
+  border-bottom: 5px solid $color-azpk;
+}
+
+.tabs a:focus {
+  text-decoration: none;
+}
+
+
+.subnavbar {
+  opacity: $opacity-subnavbar;
+  box-shadow: 0 1px 5px 0 rgba(0,0,0,0.07),0 1px 0 0 rgba(0,0,0,0.03);
+  background: $bg-color-subnavbar;
+  transition: all 0.3s ease;
+  display: flex;
+  padding: 0px 30px;
+  align-items: center;
+  justify-content: center;
+}

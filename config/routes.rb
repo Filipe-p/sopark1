@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   mount Attachinary::Engine => "/attachinary"
   root to: 'pages#home'
 
@@ -9,7 +10,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :cars
+  resources :space_dashboards, :booking_dashboards, :cars
+
+  # resources :bookings, only: [:index]
 
   devise_for :users,
   controllers: { omniauth_callbacks: 'users/omniauth_callbacks', confirmations: 'confirmations'}
