@@ -3,22 +3,23 @@ class SpacesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
 
   def index
-    # search = params[:search].present? ? params[:search] : nil
-    # # if params.has_key?(:search) && params[:search][:location] != ""
-    #     # @spaces = Space.where(location: params[:search][:location])
-    #     @spaces =  if search
-    #       Space.search(search)
-    # else
-    #   Space.all
-    # end
 
-    search = params[:search].present? ? params[:search][:location] : nil
-    # if params.has_key?(:search) && params[:search][:location] != ""
-        # @spaces = Space.where(location: params[:search][:location])
-    @spaces =  if search
-      Space.search(search)
+    if params[:search].present?
+      search = params[:search][:location]
+
+      geo = Geocoder.coordinates(search)
+      latitude = geo[0]
+      longitude = geo[1]
+      @spaces = Space.search "*", where: {
+        location: {
+          near: [latitude, longitude],
+          within: "10km"
+        }
+      }
+
+
     else
-      Space.all
+      @spaces = Space.all
     end
 
      # @spaces = @spaces.where.not(latitude: nil, longitude: nil)

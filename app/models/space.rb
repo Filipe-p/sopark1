@@ -1,5 +1,5 @@
 class Space < ApplicationRecord
-  searchkick
+  searchkick locations: [:location]
   belongs_to :user
 
   validates :name, :location, :price, presence: true
@@ -55,10 +55,7 @@ class Space < ApplicationRecord
   end
 
   def search_data
-    {
-      location: location
-    }
-
+   attributes.merge location: {latitude: latitude, longitude: longitude}
   end
 
 end
