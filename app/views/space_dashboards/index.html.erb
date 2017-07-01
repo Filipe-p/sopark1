@@ -3,11 +3,7 @@
     <h2 class="text-center">Your next parking spot</h2>
   </div>
   <div class="row">
-<%= simple_form_for :search,  url: spaces_path, method: "get", html: {class: 'form-inline'} do |f| %>
-<%= f.input :location, placeholder: "Location", label_html: {class: 'hidden'}, input_html: { class: "input-lg" }%>
 
-<%= f.submit "Go", class: "btn btn-lg btn-primary"%>
-<% end %>
     <div class="col-sm-4">
 
       <% @spaces.each do |space| %>
@@ -18,7 +14,7 @@
             <h2><%= space.price %> € / day</h2>
           </div>
 
-          <%= link_to "", space_path(space), class: "list-link" %>
+          <%= link_to "", space_dashboard_path(space), class: "list-link" %>
         </div>
       </div>
       <% end %>
@@ -51,8 +47,3 @@
     <!-- source/index.html.erb -->
   </div>
 </div>
-
-
-
-
-

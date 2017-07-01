@@ -15,9 +15,8 @@ class SpacesController < ApplicationController
     search = params[:search].present? ? params[:search][:location] : nil
     # if params.has_key?(:search) && params[:search][:location] != ""
         # @spaces = Space.where(location: params[:search][:location])
-        @spaces =  if search
-          Space.search(search)
-
+    @spaces =  if search
+      Space.search(search)
     else
       Space.all
     end
@@ -54,7 +53,7 @@ class SpacesController < ApplicationController
     @space = Space.new(space_params)
     @space.user = current_user
     if @space.save
-      redirect_to space_path(@space) # I need to redirect the user to the dashboard
+      redirect_to space_path(@space) # I need to redirect the user to the dashboard IMPORTANT!
     else
       render :new
     end
@@ -65,7 +64,7 @@ class SpacesController < ApplicationController
 
   def update
     if @space.update(space_params)
-      redirect_to space_path(@space)
+      redirect_to space_path(@space) # I need to redirect the user to the dashboard IMPORTANT!
     else
       render :new
     end
@@ -73,7 +72,7 @@ class SpacesController < ApplicationController
 
   def destroy
     @space.destroy
-    redirect_to spaces_path
+    redirect_to spaces_path  # I need to redirect the user to the dashboard IMPORTANT!
   end
 
 
@@ -86,6 +85,10 @@ class SpacesController < ApplicationController
   def space_params
     space_params = params.require(:space).permit(:name, :location, :user, :covered, :staff, :valet, :gate, :cctv, :charging, :water, :price, :photo, :price_cents, :price)
     space_params
+  end
+
+  def search_params
+    search_params = params.require(:search).permit(:location, :start_datetime, :end_datetime)
   end
 
 end
