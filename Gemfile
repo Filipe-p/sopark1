@@ -24,6 +24,9 @@ end
 
 gem "geocoder"
 
+gem "searchkick"
+
+
 gem "coffee-rails"
 gem "gmaps4rails"
 

@@ -3,13 +3,26 @@ class SpacesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
 
   def index
-    if params.has_key?(:search) && params[:search][:location] != ""
-        @spaces = Space.where(location: params[:search][:location])
+    # search = params[:search].present? ? params[:search] : nil
+    # # if params.has_key?(:search) && params[:search][:location] != ""
+    #     # @spaces = Space.where(location: params[:search][:location])
+    #     @spaces =  if search
+    #       Space.search(search)
+    # else
+    #   Space.all
+    # end
+
+    search = params[:search].present? ? params[:search][:location] : nil
+    # if params.has_key?(:search) && params[:search][:location] != ""
+        # @spaces = Space.where(location: params[:search][:location])
+        @spaces =  if search
+          Space.search(search)
+
     else
-      @spaces = Space.all
+      Space.all
     end
 
-    @spaces = @spaces.where.not(latitude: nil, longitude: nil)
+     # @spaces = @spaces.where.not(latitude: nil, longitude: nil)
 
     @hash = Gmaps4rails.build_markers(@spaces) do |space, marker|
       marker.lat space.latitude
