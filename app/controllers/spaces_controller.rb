@@ -1,15 +1,13 @@
 class SpacesController < ApplicationController
   before_action :set_space, only: [:show, :edit, :update, :destroy]
-  skip_before_action :authenticate_user!, only: [:index, :show]
+  skip_before_action :authenticate_user!, only: [:show]
 
   def index
-    if params.has_key?(:search) && params[:search][:location] != ""
-      @spaces = Space.where(location: params[:search][:location])
-    else
-      @spaces = Space.all
-    end
 
-    @spaces = @spaces.where.not(latitude: nil, longitude: nil)
+    @spaces = Space.all
+
+
+     # @spaces = @spaces.where.not(latitude: nil, longitude: nil)
 
     @hash = Gmaps4rails.build_markers(@spaces) do |space, marker|
       marker.lat space.latitude
@@ -71,12 +69,8 @@ class SpacesController < ApplicationController
   end
 
   def space_params
-    space_params = params.require(:space).permit(:name, :location, :user, :covered, :staff, :valet, :gate, :cctv, :charging, :water, :price, :photo, :price_cents, :price)
+    space_params = params.require(:space).permit(:name, :location, :covered, :staff, :valet, :gate, :cctv, :charging, :water, :price, :photo, :price_cents, :price, :country, :zip_code, :house_number, :street, :city_town, :photo)
     space_params
-  end
-
-  def search_params
-    search_params = params.require(:search).permit(:location, :start_datetime, :end_datetime)
   end
 
 end

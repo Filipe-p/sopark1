@@ -8,10 +8,10 @@
   <%= f.input :house_number, input_html: { placeholder: "Ex.7" } %>
   <%= f.input :street, input_html: { placeholder: "Ex. Rua Rosa" } %>
   <%= f.input :city_town, input_html: { placeholder: "Ex. Lisboa" } %>
-<!-- missing country but breaking -->
+  <%= f.input :country, priority: ["PT"], input_html: { placeholder: "Ex. Portugal" } %>
 
   <h2>About the space</h2>
-    <%= f.input :covered, as: :boolean, checked_value: true, unchecked_value: false %>
+  <%= f.input :covered, as: :boolean, checked_value: true, unchecked_value: false %>
   <%= f.input :staff, as: :boolean, checked_value: true, unchecked_value: false %>
   <%= f.input :valet, as: :boolean, checked_value: true, unchecked_value: false %>
   <%= f.input :gate, as: :boolean, checked_value: true, unchecked_value: false %>

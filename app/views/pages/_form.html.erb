@@ -1,5 +1,5 @@
-<%= simple_form_for :search,  url: spaces_path, method: "get", html: {class: 'form-inline'} do |f| %>
-<%= f.input :location, placeholder: "Location", label_html: {class: 'hidden'}, input_html: { class: "input-lg" }%>
+<%= simple_form_for :search,  url: space_searches_path, method: "get", html: {class: 'form-inline'} do |f| %>
+<%= f.input :location, placeholder: "Location", label_html: {class: 'hidden'}, input_html: { class: "input-lg", id: "location_input" }%>
 
 <%= f.input :start_date, as: :string, input_html: {class: "datepicker input-lg"}, placeholder: "From", label_html: {class: 'hidden'} %>
 <%= f.input :end_date, as: :string, input_html: {class: "datepicker input-lg"}, placeholder: "Until", label_html: {class: 'hidden'} %>
@@ -26,6 +26,9 @@
       autoclose: true
     });
   })
+</script>
+<script>
+  $("#location_input").geocomplete();
 </script>
 
 <% end %>

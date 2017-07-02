@@ -1,4 +1,5 @@
 class Space < ApplicationRecord
+  searchkick locations: [:location]
   belongs_to :user
 
   validates :name, :location, :price, presence: true
@@ -51,6 +52,16 @@ class Space < ApplicationRecord
 
   def available?(booking)
     unavailable_dates - (booking.start_datetime..booking.end_datetime).to_a == unavailable_dates
+  end
+
+  def search_data
+      attributes.merge location: {lat: latitude, lon: longitude},
+      unavailable_dates: unavailable_dates
+  end
+
+  def reindex_space
+    # user.reindex
+    self.reindex
   end
 
 end

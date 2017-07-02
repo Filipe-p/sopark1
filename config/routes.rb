@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :space_dashboards, :booking_dashboards, :cars
+  resources :space_dashboards, :booking_dashboards, :cars, :space_searches
 
   # resources :bookings, only: [:index]
 
