@@ -1,10 +1,10 @@
 <%= simple_form_for :search,  url: space_searches_path, method: "get", html: {class: 'form-inline'} do |f| %>
-<%= f.input :location, placeholder: "Location", label_html: {class: 'hidden'}, input_html: { class: "input-lg" }%>
+<%= f.input :location, placeholder: "Location", label_html: {class: 'hidden'}, input_html: { class: "input-lg", id: "location_input" }%>
 
 <%= f.input :start_date, as: :string, input_html: {class: "datepicker input-lg"}, placeholder: "From", label_html: {class: 'hidden'} %>
 <%= f.input :end_date, as: :string, input_html: {class: "datepicker input-lg"}, placeholder: "Until", label_html: {class: 'hidden'} %>
 
-<%= f.submit "Go", class: "btn btn-lg btn-primary my-btn"%>
+<%= f.submit "Go", class: "btn btn-lg btn-primary"%>
 <% end %>
 
 
@@ -27,13 +27,8 @@
     });
   })
 </script>
-      <script>
-        $("input").geocomplete();
-
-// Trigger geocoding request.
-$(".my-btn").click(function(){
-  $("input").trigger("geocode");
-});
+<script>
+  $("#location_input").geocomplete();
 </script>
 
 <% end %>
