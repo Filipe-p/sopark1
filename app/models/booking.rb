@@ -4,6 +4,7 @@ class Booking < ApplicationRecord
   belongs_to :space
 
   validates :user, :space, :start_datetime, :end_datetime, :cost, presence: true
+  after_commit :reindex_booking
 
   monetize :cost_cents
 
@@ -18,6 +19,10 @@ class Booking < ApplicationRecord
       errors.add(:start_datetime, "End date must be higher or equal than start date")
       errors.add(:end_datetime, "End date must be higher or equal than start date")
     end
+  end
+
+  def reindex_booking
+    Space.find(space.id).reindex
   end
 end
 

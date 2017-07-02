@@ -1,0 +1,46 @@
+<%= simple_form_for :search,  url: space_searches_path, method: "get", html: {class: 'form-inline text-center'} do |f| %>
+<%= f.input :location, placeholder: "Location", label_html: {class: 'hidden'}, input_html: { class: "input-lg" }%>
+
+<%= f.input :start_date, as: :string, input_html: {class: "datepicker input-lg"}, placeholder: "From", label_html: {class: 'hidden'} %>
+<%= f.input :end_date, as: :string, input_html: {class: "datepicker input-lg"}, placeholder: "Until", label_html: {class: 'hidden'} %>
+
+<div class="dropdown form-group">
+  <button class="btn btn-default btn-lg dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    Filters
+    <span class="caret"></span>
+  </button>
+  <div class="dropdown-menu list-inline text-center" aria-labelledby="dropdownMenu1">
+      <%= f.input :covered, as: :boolean, checked_value: true, unchecked_value: false %>
+      <%= f.input :staff, as: :boolean, checked_value: true, unchecked_value: false %>
+      <%= f.input :valet, as: :boolean, checked_value: true, unchecked_value: false %>
+      <%= f.input :gate, as: :boolean, checked_value: true, unchecked_value: false %>
+      <%= f.input :cctv, as: :boolean, checked_value: true, unchecked_value: false %>
+      <%= f.input :charging, as: :boolean, checked_value: true, unchecked_value: false %>
+      <%= f.input :water, as: :boolean, checked_value: true, unchecked_value: false %>
+      <%= f.input :photo, as: :boolean, checked_value: true, unchecked_value: false %>
+  </div>
+</div>
+
+<%= f.submit "Go", class: "btn btn-lg btn-primary"%>
+<% end %>
+
+<% content_for(:after_js) do %>
+
+<script>
+
+  <% min_date = Date.today %>
+
+  $(document).ready(function() {
+    $('.datepicker').datepicker({
+      format: 'dd/mm/yyyy',
+      startDate: new Date(
+        <%= min_date.year %>,
+        <%= min_date.month - 1 %>,
+        <%= min_date.day %>
+        ),
+      autoclose: true
+    });
+  })
+</script>
+
+<% end %>

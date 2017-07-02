@@ -55,7 +55,13 @@ class Space < ApplicationRecord
   end
 
   def search_data
-   attributes.merge location: {lat: latitude, lon: longitude}
+      attributes.merge location: {lat: latitude, lon: longitude},
+      unavailable_dates: unavailable_dates
+  end
+
+  def reindex_space
+    # user.reindex
+    self.reindex
   end
 
 end

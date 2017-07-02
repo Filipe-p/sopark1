@@ -1,4 +1,4 @@
-<%= simple_form_for :search,  url: spaces_path, method: "get", html: {class: 'form-inline'} do |f| %>
+<%= simple_form_for :search,  url: space_searches_path, method: "get", html: {class: 'form-inline'} do |f| %>
 <%= f.input :location, placeholder: "Location", label_html: {class: 'hidden'}, input_html: { class: "input-lg" }%>
 
 <%= f.input :start_date, as: :string, input_html: {class: "datepicker input-lg"}, placeholder: "From", label_html: {class: 'hidden'} %>
