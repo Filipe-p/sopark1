@@ -42,11 +42,19 @@
           });
         });
       </script>
-      <% end %>
+      <script>
+        $("input").geocomplete({map: "#map"});
 
-    </div>
-    <!-- source/index.html.erb -->
-  </div>
+// Trigger geocoding request.
+$(".my-btn").click(function(){
+  $("input").trigger("geocode");
+});
+</script>
+<% end %>
+
+</div>
+<!-- source/index.html.erb -->
+</div>
 </div>
 
 

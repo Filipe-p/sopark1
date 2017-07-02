@@ -4,7 +4,7 @@
 <%= f.input :start_date, as: :string, input_html: {class: "datepicker input-lg"}, placeholder: "From", label_html: {class: 'hidden'} %>
 <%= f.input :end_date, as: :string, input_html: {class: "datepicker input-lg"}, placeholder: "Until", label_html: {class: 'hidden'} %>
 
-<%= f.submit "Go", class: "btn btn-lg btn-primary"%>
+<%= f.submit "Go", class: "btn btn-lg btn-primary my-btn"%>
 <% end %>
 
 
@@ -26,6 +26,14 @@
       autoclose: true
     });
   })
+</script>
+      <script>
+        $("input").geocomplete();
+
+// Trigger geocoding request.
+$(".my-btn").click(function(){
+  $("input").trigger("geocode");
+});
 </script>
 
 <% end %>
