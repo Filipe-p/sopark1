@@ -55,7 +55,7 @@ class Space < ApplicationRecord
   end
 
   def search_data
-   attributes.merge location: {latitude: latitude, longitude: longitude}
+   attributes.merge location: {lat: latitude, lon: longitude}
   end
 
 end

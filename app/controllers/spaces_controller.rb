@@ -7,12 +7,12 @@ class SpacesController < ApplicationController
     if params[:search].present?
       search = params[:search][:location]
 
-      geo = Geocoder.coordinates(search)
+      geo = Geocoder.coordinates(search, params: {region: "pt"})
       latitude = geo[0]
       longitude = geo[1]
       @spaces = Space.search "*", where: {
         location: {
-          near: [latitude, longitude],
+          near: {lat: latitude, lon: longitude},
           within: "10km"
         }
       }
