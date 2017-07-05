@@ -39,7 +39,7 @@ class SpaceSearchesController < ApplicationController
 
   def search_conditions
     search_conditions = {}
-    search_params = params.require(:search).permit(:location, :start_date, :end_date, :price, :covered, :staff, :valet, :gate, :cctv, :charging, :water)
+    search_params = params.require(:search).permit(:location, :start_date, :end_date, :price, :covered, :staff, :valet, :gate, :cctv, :charging, :water, :price_cents)
 
     # for boolean types
 
@@ -83,11 +83,10 @@ class SpaceSearchesController < ApplicationController
     end
 
 
-
-
-
-
-
+    if search_params[:price_cents].present? && search_params[:price_cents] != ""
+      search_params[:price_cents] = search_params[:price_cents].split(',').map{|price_cents| price_cents.to_i*100}
+      search_conditions[:price_cents] = search_params[:price_cents][0]..search_params[:price_cents][1]
+    end
 
     search_conditions
   end

@@ -10,40 +10,53 @@
     <span class="caret"></span>
   </button>
   <div class="dropdown-menu list-inline text-center" aria-labelledby="dropdownMenu1">
-      <%= f.input :covered, as: :boolean, checked_value: true, unchecked_value: false %>
-      <%= f.input :staff, as: :boolean, checked_value: true, unchecked_value: false %>
-      <%= f.input :valet, as: :boolean, checked_value: true, unchecked_value: false %>
-      <%= f.input :gate, as: :boolean, checked_value: true, unchecked_value: false %>
-      <%= f.input :cctv, as: :boolean, checked_value: true, unchecked_value: false %>
-      <%= f.input :charging, as: :boolean, checked_value: true, unchecked_value: false %>
-      <%= f.input :water, as: :boolean, checked_value: true, unchecked_value: false %>
-      <%= f.input :photo, as: :boolean, checked_value: true, unchecked_value: false %>
+    <%= f.input :covered, as: :boolean, checked_value: true, unchecked_value: false %>
+    <%= f.input :staff, as: :boolean, checked_value: true, unchecked_value: false %>
+    <%= f.input :valet, as: :boolean, checked_value: true, unchecked_value: false %>
+    <%= f.input :gate, as: :boolean, checked_value: true, unchecked_value: false %>
+    <%= f.input :cctv, as: :boolean, checked_value: true, unchecked_value: false %>
+    <%= f.input :charging, as: :boolean, checked_value: true, unchecked_value: false %>
+    <%= f.input :water, as: :boolean, checked_value: true, unchecked_value: false %>
+    <%= f.input :photo, as: :boolean, checked_value: true, unchecked_value: false %>
   </div>
 </div>
+<div class="dropdown form-group">
+  <button class="btn btn-default btn-lg dropdown-toggle my-btn" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    Price Interval
+    <span class="caret"></span>
+  </button>
+  <div class="dropdown-menu list-inline text-center" aria-labelledby="dropdownMenu1">
 
-<%= f.submit "Go", class: "btn btn-lg btn-primary"%>
-<% end %>
+  <b>€ 0</b> <input name="search[price_cents]" id="ex2" type="text" class="span2" value="" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="[0,100]"/> <b>€ 100</b>
+    </div>
+    <%= f.submit "Go", class: "btn btn-lg btn-primary"%>
+    <% end %>
 
-<% content_for(:after_js) do %>
+    <% content_for(:after_js) do %>
 
-<script>
+    <script>
 
-  <% min_date = Date.today %>
+      <% min_date = Date.today %>
 
-  $(document).ready(function() {
-    $('.datepicker').datepicker({
-      format: 'dd/mm/yyyy',
-      startDate: new Date(
-        <%= min_date.year %>,
-        <%= min_date.month - 1 %>,
-        <%= min_date.day %>
-        ),
-      autoclose: true
-    });
-  })
+      $(document).ready(function() {
+        $('.datepicker').datepicker({
+          format: 'dd/mm/yyyy',
+          startDate: new Date(
+            <%= min_date.year %>,
+            <%= min_date.month - 1 %>,
+            <%= min_date.day %>
+            ),
+          autoclose: true
+        });
+      })
+    </script>
+    <script>
+      $("#location_input").geocomplete();
+    </script>
+    <script>
+  // With JQuery
+  $("#ex2").slider({});
 </script>
-<script>
-  $("#location_input").geocomplete();
-</script>
+
 
 <% end %>

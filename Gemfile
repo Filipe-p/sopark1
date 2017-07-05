@@ -17,6 +17,7 @@ gem 'sass-rails'
 gem 'simple_form'
 gem 'country_select'
 gem 'uglifier'
+gem 'bootstrap-slider-rails'
 
 source "https://rails-assets.org" do
   gem "rails-assets-underscore"
